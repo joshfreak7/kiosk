@@ -1,4 +1,4 @@
-package ch.juventus.se.kiosk.controller.usecase;
+package ch.juventus.se.kiosk.controller;
 
 /**
  * @author: Joni
