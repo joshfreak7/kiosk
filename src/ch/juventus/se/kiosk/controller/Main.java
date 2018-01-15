@@ -1,21 +1,8 @@
 package ch.juventus.se.kiosk.controller;
 
-import ch.juventus.se.kiosk.model.Address;
-import ch.juventus.se.kiosk.model.Employee;
-import ch.juventus.se.kiosk.model.Kiosk;
-import ch.juventus.se.kiosk.error.InsufficientFundsException;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException{
+    public static void main(String[] args) {
 
         /*FileHandler fh = new FileHandler(new File("C:\\Users\\Joni\\Desktop\\input.txt"), new File("C:\\Users\\Joni\\Desktop\\output.txt"));
         fh.write(fh.read());*/
@@ -91,51 +78,9 @@ public class Main {
         System.out.println("Anananas is a palindrom: " + palindrom("Anananas"));
         System.out.println("Anna Bob Anna is a palindrom: " + palindrom("Anna Bob Anna"));*/
 
-
-        /*RunnableDemo R1 = new RunnableDemo("Thread-1");
-        R1.start();
-
-        RunnableDemo R2 = new RunnableDemo("Thread-2");
-        R2.start();*/
-
-
-        /*PrintDemo PD = new PrintDemo();
-
-        ThreadDemo T1 = new ThreadDemo("Thread - 1 ", PD);
-        ThreadDemo T2 = new ThreadDemo("Thread - 2", PD);
-
-        T1.start();
-        T2.start();
-
-
-        try{
-            T1.join();
-            T2.join();
-        } catch(Exception e){
-            System.out.println("Interrupted");
-        }*/
-
-        /*Chat m = new Chat();
-        new T1(m);
-        new T2(m);*/
-
-        String res1 = "resource 1";
-        String res2 = "resource 2";
-        String res3 = "resource 3";
-
-        Thread t1 = new Thread(new SyncThread(res1,res2), "t1");
-        Thread t2 = new Thread(new SyncThread(res2,res3), "t2");
-        Thread t3 = new Thread(new SyncThread(res3,res1), "t3");
-
-        t1.start();
-        Thread.sleep(5000);
-        t2.start();
-        Thread.sleep(5000);
-        t3.start();
-
     }
 
-    public static boolean palindrom(String name){
+    /*public static boolean palindrom(String name){
         name = name.toLowerCase();
 
         if( name.length() < 2 ){
@@ -147,7 +92,7 @@ public class Main {
         }
 
         return false;
-    }
+    }*/
 
     /*public void withdraw(double amount) throws InsufficientFundsException {
         if(amount <= kiosk.getBalance()){
