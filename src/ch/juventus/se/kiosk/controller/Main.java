@@ -1,8 +1,19 @@
 package ch.juventus.se.kiosk.controller;
 
+import ch.juventus.se.kiosk.controller.usecase.DefaultUseCaseService;
+import ch.juventus.se.kiosk.controller.usecase.UseCaseService;
+
 public class Main {
 
     public static void main(String[] args) {
+
+        UseCaseService useCaseService = new DefaultUseCaseService();
+
+        useCaseService.customerBuysArticles();
+
+        useCaseService.employeeOrdersArticles();
+
+        useCaseService.employeeDoesInventory();
 
         /*FileHandler fh = new FileHandler(new File("C:\\Users\\Joni\\Desktop\\input.txt"), new File("C:\\Users\\Joni\\Desktop\\output.txt"));
         fh.write(fh.read());*/

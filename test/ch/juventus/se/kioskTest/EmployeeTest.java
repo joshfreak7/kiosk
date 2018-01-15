@@ -16,7 +16,7 @@ public class EmployeeTest {
     @Before
     public void setUp() {
         System.out.println("Testing setup");
-        Employee empl1 = new Employee("Tester", "lastName");
+        Employee empl1 = new Employee("E1234", "Tester", "lastName");
     }
 
     @Test
