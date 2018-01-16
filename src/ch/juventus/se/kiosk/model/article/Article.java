@@ -1,4 +1,5 @@
-package ch.juventus.se.kiosk.model;
+package ch.juventus.se.kiosk.model.article;
+
 /**
  * Article class stores information about the article which can be purchased at the kiosk
  * @author: Joni
@@ -8,29 +9,29 @@ package ch.juventus.se.kiosk.model;
 public abstract class Article {
 
     private String title;
-    private double price;
-    private Category cat;
+    private Price price;
+    private int count;
 
-    public Article(String title, double price, Category cat) {
+    public Article(String title, Price price, int count) {
         this.title = title;
         this.price = price;
-        this.cat = cat;
+        this.count = count;
     }
 
     @Override
     public String toString(){
-        return "Article: " + this.title + "\nCategory: "+ this.cat + "\nPrice: " + this.price;
+        return this.count + " x " + this.title + ": " + this.price;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public double getPrice() {
+    public Price getPrice() {
         return price;
     }
 
-    public Category getCat() {
-        return cat;
+    public int getCount() {
+        return count;
     }
 }
