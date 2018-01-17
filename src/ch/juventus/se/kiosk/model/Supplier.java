@@ -1,6 +1,8 @@
 package ch.juventus.se.kiosk.model;
 
-import java.util.Map;
+import ch.juventus.se.kiosk.model.article.Article;
+
+import java.util.List;
 
 /**
  * This class represents a supplier which delivers articles from Warehouse to the kiosk. Extends a simple Person.
@@ -9,9 +11,14 @@ import java.util.Map;
  * @since: 07.09.2017
  */
 public class Supplier extends Person {
-    private Map<Integer, Article> stack;
+    private List<Article> stack;
 
-    public Supplier() {
+    public Supplier(List<Article> stack) {
         super();
+        this.stack = stack;
+    }
+
+    public List<Article> getStack() {
+        return stack;
     }
 }

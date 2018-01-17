@@ -17,7 +17,7 @@ public class Employee extends Person{
         super();
         employeeId = "E1234";
     }
-    public Employee(String employeeId, String firstName, String lastName) {
+    public Employee(String firstName, String lastName, String employeeId) {
         super(firstName, lastName);
         this.employeeId = employeeId;
         logger.info("Start of setUp");
@@ -31,4 +31,6 @@ public class Employee extends Person{
     public String toString(){
         return "EmployeeID: " + employeeId + "\n" + super.toString();
     }
+
+
 }

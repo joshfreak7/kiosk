@@ -17,7 +17,7 @@ public class Snack extends Article {
     @Override
     public String toString(){
         return super.toString()
-                + " (" + this.getClass()
+                + " (" + this.getClass().getSimpleName()
                 + " type " + this.cat + ")";
     }
 }

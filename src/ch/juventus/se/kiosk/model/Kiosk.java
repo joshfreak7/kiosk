@@ -1,5 +1,8 @@
 package ch.juventus.se.kiosk.model;
 
+import ch.juventus.se.kiosk.model.article.Article;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +26,8 @@ public class Kiosk {
         this.address = address;
         this.cashRegister = cashRegister;
         this.supplier = supplier;
+        this.employees = new ArrayList<>();
+        this.articles = new ArrayList<>();
         setOpen(false);
     }
 
@@ -38,18 +43,17 @@ public class Kiosk {
 
     /**
      * Close or open the kiosk.
-
      * @param open describes whether the kiosk is opened or closed.
      */
     public void setOpen(boolean open) { isOpen = open; }
 
     @Override
     public String toString(){
-        return "Name: " + this.name
-                + "\nAddress: " + this.address.toString()
-                + "\nCash: " + this.cashRegister
-                + "\nEmployees: " + this.employees.toString()
-                + "\nArticles: " + this.articles.toString();
+        return "\tName: " + this.name
+                + "\n\tAddress: " + this.address.toString()
+                + "\n\tCash: " + this.cashRegister
+                + "\n\tEmployees: " + this.employees.toString()
+                + "\n\tArticles: " + this.articles.toString();
     }
 
     public List<Employee> getEmployees() {

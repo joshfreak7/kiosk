@@ -18,7 +18,7 @@ public class Address {
 
     @Override
     public String toString(){
-        return this.street + "\n" + this.plz + " " + this.location;
+        return this.street + ", " + this.plz + " " + this.location;
     }
 
     public String getStreet() {

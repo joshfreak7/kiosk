@@ -16,7 +16,7 @@ public class Alcohol extends Drink {
     @Override
     public String toString(){
         return super.toString()
-                + " (" + this.getClass()
+                + " (" + this.getClass().getSimpleName()
                 + " age rating " + AGE
                 + ", volume in dl " + getVolumeInDl() + ")";
     }

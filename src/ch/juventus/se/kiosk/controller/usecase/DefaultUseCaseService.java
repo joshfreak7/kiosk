@@ -1,4 +1,15 @@
-package ch.juventus.se.kiosk.controller;
+package ch.juventus.se.kiosk.controller.usecase;
+
+import ch.juventus.se.kiosk.error.InsufficientFundsException;
+import ch.juventus.se.kiosk.model.Address;
+import ch.juventus.se.kiosk.model.Customer;
+import ch.juventus.se.kiosk.model.Kiosk;
+import ch.juventus.se.kiosk.model.Supplier;
+import ch.juventus.se.kiosk.model.article.Article;
+import ch.juventus.se.kiosk.model.article.Price;
+import ch.juventus.se.kiosk.model.article.Tobacco;
+
+import java.util.ArrayList;
 
 /**
  * @author: Joni
@@ -14,22 +25,40 @@ public class DefaultUseCaseService implements UseCaseService {
         StringBuffer sb = new StringBuffer();
 
         sb.append("Create Kiosk:"+NEW_LINE);
-        sb.append("\t..."+NEW_LINE);
+        Kiosk kiosk = new Kiosk("Testkiosk", new Address("Testingstreet 123",8000, "Zürich"),350.00, new Supplier(new ArrayList()));
+        sb.append(kiosk+NEW_LINE);
         sb.append(NEW_LINE);
 
         sb.append("Create Customer:"+NEW_LINE);
-        sb.append("\t..."+NEW_LINE);
+        Customer customer = new Customer("Another", "Customer", 25, 50.00);
+        sb.append(customer + NEW_LINE);
         sb.append(NEW_LINE);
 
         sb.append("Add articles to customer's basket:"+NEW_LINE);
-        sb.append("\t..."+NEW_LINE);
+        try {
+            customer.addArticleToBasket(new Tobacco("Zigis", new Price("CHF", 7.10), 5));
+        }catch(InsufficientFundsException ife) {
+            sb.append(ife.getMessage());
+        }
+        sb.append(customer.getBasketFormatted()+NEW_LINE);
         sb.append(NEW_LINE);
+
+        sb.append("Add articles to customer's basket:"+NEW_LINE);
+        try {
+            customer.addArticleToBasket(new Tobacco("ZigisAnderi", new Price("CHF", 7.10), 2));
+        }catch(InsufficientFundsException ife) {
+            sb.append(ife.getMessage());
+        }
+        sb.append(customer.getBasketFormatted());
+        sb.append(NEW_LINE);
+
 
         sb.append("Checkout customer:"+NEW_LINE);
         sb.append("\t..."+NEW_LINE);
 
         String text = sb.toString();
         // TODO: Textfile erstellen
+        System.out.println(text);
     }
 
     @Override

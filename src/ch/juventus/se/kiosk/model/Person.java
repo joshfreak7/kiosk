@@ -19,7 +19,7 @@ public abstract class Person implements Comparable{
 
     @Override
     public String toString(){
-        return "Firstname: " + this.firstName + ", Lastname: " + this.lastName;
+        return "\tName: " + this.firstName + " " + this.lastName;
     }
 
     @Override

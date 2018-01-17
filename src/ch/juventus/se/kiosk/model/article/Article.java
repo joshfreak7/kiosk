@@ -6,32 +6,69 @@ package ch.juventus.se.kiosk.model.article;
  * @version: 1.0
  * @since: 07.09.2017
  */
-public abstract class Article {
+public abstract class Article implements Comparable{
 
     private String title;
-    private Price price;
+    private Price pricePerArticle;
     private int count;
 
-    public Article(String title, Price price, int count) {
+    public Article(String title, Price pricePerArticle, int count) {
         this.title = title;
-        this.price = price;
+        this.pricePerArticle = pricePerArticle;
         this.count = count;
+    }
+
+    public double getCost(){
+        return pricePerArticle.getAmount() * count;
     }
 
     @Override
     public String toString(){
-        return this.count + " x " + this.title + ": " + this.price;
+        return this.count + " x " + this.title + ": " + this.pricePerArticle;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        Article a = (Article) o;
+        return this.title.compareTo(a.getTitle());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Article article = (Article) o;
+
+        return title.equals(article.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return title.hashCode();
     }
 
     public String getTitle() {
         return title;
     }
 
-    public Price getPrice() {
-        return price;
+    public Price getPricePerArticle() {
+        return pricePerArticle;
+    }
+
+    public double getAmountPerArticle() {
+        return pricePerArticle.getAmount();
+    }
+
+    public String getCurrency() {
+        return pricePerArticle.getCurrency();
     }
 
     public int getCount() {
         return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 }
