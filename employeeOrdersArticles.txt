@@ -1,0 +1,68 @@
+******* USECASE: employeeOrdersArticles *******
+Create Kiosk:
+	Name: Testkiosk
+	Address: Testingstreet 123, 8000 Zürich
+	Cash: 350.0
+	Employees: [EmployeeID: E0123, 	Name: Test Angestellter]
+	Open: false
+	Articles: 
+		15 x NZZ: CHF 3.2
+		5 x Salami: CHF 5.8 (Snack type SANDWICH)
+		5 x Vodka 0.7L: CHF 20.0 (Alcohol age rating 18, volume in dl 7.0)
+		10 x Apfel: CHF 1.0 (Snack type FRUIT)
+		10 x Zweifel Paprika: CHF 6.7 (Snack type SALTY)
+		20 x Zimt Kaugummi: CHF 1.5 (Snack type SWEET)
+		15 x RedBull: CHF 3.5 (Softdrink volume in dl 2.5)
+		10 x Quöllfrisch 0.5L: CHF 1.7 (Alcohol age rating 16, volume in dl 5.0)
+		15 x Winston BLUE: CHF 8.1 (Tobacco age rating 16)
+
+
+Supplier:
+	Name: Hans Muster
+	Stack: 
+		15 x NZZ: CHF 3.2
+		5 x Salami: CHF 5.8 (Snack type SANDWICH)
+		5 x Vodka 0.7L: CHF 20.0 (Alcohol age rating 18, volume in dl 7.0)
+		10 x Apfel: CHF 1.0 (Snack type FRUIT)
+		10 x Zweifel Paprika: CHF 6.7 (Snack type SALTY)
+		20 x Zimt Kaugummi: CHF 1.5 (Snack type SWEET)
+		15 x RedBull: CHF 3.5 (Softdrink volume in dl 2.5)
+		10 x Quöllfrisch 0.5L: CHF 1.7 (Alcohol age rating 16, volume in dl 5.0)
+		15 x Winston BLUE: CHF 8.1 (Tobacco age rating 16)
+
+Order articles:
+		2 x Zweifel Paprika: CHF 6.7 (Snack type SALTY)
+		3 x RedBull: CHF 3.5 (Softdrink volume in dl 2.5)
+
+Kiosk:
+	Name: Testkiosk
+	Address: Testingstreet 123, 8000 Zürich
+	Cash: 326.1
+	Employees: [EmployeeID: E0123, 	Name: Test Angestellter]
+	Open: false
+	Articles: 
+		15 x NZZ: CHF 3.2
+		5 x Salami: CHF 5.8 (Snack type SANDWICH)
+		5 x Vodka 0.7L: CHF 20.0 (Alcohol age rating 18, volume in dl 7.0)
+		10 x Apfel: CHF 1.0 (Snack type FRUIT)
+		12 x Zweifel Paprika: CHF 6.7 (Snack type SALTY)
+		20 x Zimt Kaugummi: CHF 1.5 (Snack type SWEET)
+		18 x RedBull: CHF 3.5 (Softdrink volume in dl 2.5)
+		10 x Quöllfrisch 0.5L: CHF 1.7 (Alcohol age rating 16, volume in dl 5.0)
+		15 x Winston BLUE: CHF 8.1 (Tobacco age rating 16)
+
+
+Supplier:
+	Name: Hans Muster
+	Stack: 
+		15 x NZZ: CHF 3.2
+		5 x Salami: CHF 5.8 (Snack type SANDWICH)
+		5 x Vodka 0.7L: CHF 20.0 (Alcohol age rating 18, volume in dl 7.0)
+		10 x Apfel: CHF 1.0 (Snack type FRUIT)
+		8 x Zweifel Paprika: CHF 6.7 (Snack type SALTY)
+		20 x Zimt Kaugummi: CHF 1.5 (Snack type SWEET)
+		12 x RedBull: CHF 3.5 (Softdrink volume in dl 2.5)
+		10 x Quöllfrisch 0.5L: CHF 1.7 (Alcohol age rating 16, volume in dl 5.0)
+		15 x Winston BLUE: CHF 8.1 (Tobacco age rating 16)
+
+

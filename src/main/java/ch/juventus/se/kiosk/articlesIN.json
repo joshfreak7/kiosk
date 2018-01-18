@@ -1,0 +1,13 @@
+[
+  {
+    "title": "Blick",
+    "price":
+    [
+      {
+        "currency": "CHF",
+        "amount": 5.5
+      }
+    ],
+    "cat": "LOCAL"
+  }
+]
