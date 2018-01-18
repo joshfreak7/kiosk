@@ -1,11 +1,11 @@
 package ch.juventus.se.kiosk.model;
 
 import ch.juventus.se.kiosk.error.InsufficientFundsException;
+import ch.juventus.se.kiosk.helper.ListHandler;
 import ch.juventus.se.kiosk.model.article.Article;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Kiosk sells Articles to customers. Employees working at the Kiosk.
@@ -55,10 +55,6 @@ public class Kiosk {
         }
     }
 
-    public boolean isArticleAvailable(Article article){
-        return articles.contains(article);
-    }
-
     /**
      * Close or open the kiosk.
      * @param open describes whether the kiosk is opened or closed.
@@ -71,7 +67,7 @@ public class Kiosk {
                 + "\n\tAddress: " + this.address.toString()
                 + "\n\tCash: " + this.cashRegister
                 + "\n\tEmployees: " + this.employees.toString()
-                + "\n\tArticles: " + this.articles.toString();
+                + "\n\tArticles: " + new ListHandler(articles).getFormattedList();
     }
 
     public List<Employee> getEmployees() {

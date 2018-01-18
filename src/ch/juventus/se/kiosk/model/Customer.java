@@ -1,10 +1,10 @@
 package ch.juventus.se.kiosk.model;
 
-import ch.juventus.se.kiosk.error.InsufficientFundsException;
+import ch.juventus.se.kiosk.helper.ListHandler;
 import ch.juventus.se.kiosk.model.article.Article;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class represents a Customer, which buys articles at the kiosk.
@@ -24,20 +24,11 @@ public class Customer extends Person {
         this.basket = new ArrayList<>();
     }
 
-    public String getBasketFormatted() {
-        //return basket.stream().map(article -> "\t" + article.toString() + "\n").collect(Collectors.joining());
-        //return basket.stream().map(article -> "\t" + Collections.frequency(basket, article.toString())
-        //        + " x " + article.toString() + "\n").collect(Collectors.joining());
-        Set<Article> uniqueSet = new HashSet<>(basket);
-        return uniqueSet.stream().map(article -> "\t" + Collections.frequency(basket, article)
-                + " x " + article.toString() + "\n").collect(Collectors.joining());
-    }
-
     @Override
     public String toString(){
         return super.toString()
                 + "\n\tAge: " + this.age
-                + "\n\tBasket: " + getBasketFormatted();
+                + "\n\tBasket: " + new ListHandler(basket).getFormattedList();
     }
 
     public double getCash() {

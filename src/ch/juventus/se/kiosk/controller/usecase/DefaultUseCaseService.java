@@ -1,11 +1,11 @@
 package ch.juventus.se.kiosk.controller.usecase;
 
 import ch.juventus.se.kiosk.error.InsufficientFundsException;
+import ch.juventus.se.kiosk.helper.ListHandler;
 import ch.juventus.se.kiosk.model.Address;
 import ch.juventus.se.kiosk.model.Customer;
 import ch.juventus.se.kiosk.model.Kiosk;
 import ch.juventus.se.kiosk.model.Supplier;
-import ch.juventus.se.kiosk.model.article.Article;
 import ch.juventus.se.kiosk.model.article.Price;
 import ch.juventus.se.kiosk.model.article.Tobacco;
 
@@ -37,12 +37,12 @@ public class DefaultUseCaseService implements UseCaseService {
         sb.append("Add articles to customer's basket:"+NEW_LINE);
         customer.getBasket().add(new Tobacco("Zigis", new Price("CHF", 7.10), 16));
         customer.getBasket().add(new Tobacco("Zigis", new Price("CHF", 7.10), 16));
-        sb.append(customer.getBasketFormatted()+NEW_LINE);
+        sb.append(new ListHandler(customer.getBasket()).getFormattedList()+NEW_LINE);
         sb.append(NEW_LINE);
 
         sb.append("Add articles to customer's basket:"+NEW_LINE);
         customer.getBasket().add(new Tobacco("AndereTabak", new Price("CHF", 7.10), 18));
-        sb.append(customer.getBasketFormatted());
+        sb.append(new ListHandler(customer.getBasket()).getFormattedList());
         sb.append(NEW_LINE);
 
 
@@ -52,6 +52,10 @@ public class DefaultUseCaseService implements UseCaseService {
         }catch(InsufficientFundsException ife) {
             sb.append(ife.getMessage());
         }
+        sb.append("\tCustomer's basket: " + new ListHandler(customer.getBasket()).getFormattedList()+NEW_LINE);
+        sb.append("\tKiosk cash: " + kiosk.getCashRegister()+NEW_LINE);
+        sb.append("\tKiosk articles: " + new ListHandler(kiosk.getArticles()).getFormattedList()+NEW_LINE);
+        sb.append(NEW_LINE);
 
         String text = sb.toString();
         // TODO: Textfile erstellen
