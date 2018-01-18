@@ -6,9 +6,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author: Joni
@@ -24,7 +22,10 @@ public class ExcelFileHandler implements FileHandler{
         this.outputFile = outputFile;
     }
 
-    @Override
+    /**
+     * Reads articles from an Excel File.
+     * @return Returns a List of Articles
+     */
     public List<Article> readArticles() {
         List<Article> articles = new ArrayList<>();
         try {
@@ -58,7 +59,10 @@ public class ExcelFileHandler implements FileHandler{
         return articles;
     }
 
-    @Override
+    /**
+     * Saves articles to an Excel File.
+     * @param articles List of articles to be saved.
+     */
     public void writeArticles(List<Article> articles) {
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet("Inventory - List of Articles");
@@ -76,10 +80,9 @@ public class ExcelFileHandler implements FileHandler{
         cell = row.createCell(3);
         cell.setCellValue((String)"Total Price");
         int rowNum = 1;
-        int i;
 
-        for (i = 0; i < articles.size(); i++) {
-            Article article = articles.get(i);
+        Set<Article> articlesSet = new HashSet<>(articles);
+        for (Article article : articlesSet) {
             row = sheet.createRow(rowNum++);
             cell = row.createCell(0);
             cell.setCellValue((String) article.getTitle());

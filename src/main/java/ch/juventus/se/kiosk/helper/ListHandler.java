@@ -16,10 +16,12 @@ import java.util.stream.Collectors;
  */
 public class ListHandler {
 
-    private Set<Article> articles;
+    private Set<Article> articlesSet;
+    private List<Article> articlesList;
 
     public ListHandler(List<Article> articles) {
-        this.articles = new HashSet<>(articles);
+        this.articlesList = articles;
+        this.articlesSet = new HashSet<>(articles);
     }
 
     /**
@@ -30,7 +32,7 @@ public class ListHandler {
         //return basket.stream().map(article -> "\t" + article.toString() + "\n").collect(Collectors.joining());
         //return basket.stream().map(article -> "\t" + Collections.frequency(basket, article.toString())
         //        + " x " + article.toString() + "\n").collect(Collectors.joining());
-        return articles.stream().map(article -> "\t" + getArticleCount(article)
+        return articlesSet.stream().map(article -> "\t\t" + getArticleCount(article)
                 + " x " + article.toString() + "\n").collect(Collectors.joining());
     }
 
@@ -49,7 +51,7 @@ public class ListHandler {
      * @return The count of that specific article
      */
     public int getArticleCount(Article a) {
-        return Collections.frequency(articles, a);
+        return Collections.frequency(articlesList, a);
     }
 
     /**
@@ -57,12 +59,12 @@ public class ListHandler {
      * @return Total amount of article prices
      */
     public double getTotalAmount(){
-        return articles.stream().mapToDouble(Article::getAmount).sum();
+        return articlesList.stream().mapToDouble(Article::getAmount).sum();
     }
 
     public List<Article> checkAgeRating(int ageOfCustomer) {
         List<Article> toYoungForTheseArticles = new ArrayList<>();
-        for (Article a : articles) {
+        for (Article a : articlesSet) {
             if(a instanceof Alcohol){
                 Alcohol alc = (Alcohol) a;
                 if(ageOfCustomer < alc.getAgeRating()) {

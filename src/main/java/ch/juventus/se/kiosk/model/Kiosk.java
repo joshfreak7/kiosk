@@ -60,7 +60,7 @@ public class Kiosk {
         if(customer.getCash() >= totalCost) {
             customer.setCash(customer.getCash() - totalCost);
             cashRegister += totalCost;
-            articles.removeAll(customer.getBasket());
+            customer.getBasket().stream().forEach(article -> articles.remove(article));
             customer.getBasket().clear();
         } else {
             throw new InsufficientFundsException("Dear " + customer.getFullName() + ", you do NOT have enough cash! Please put some articles back!\n");
@@ -95,7 +95,7 @@ public class Kiosk {
                 + "\n\tAddress: " + this.address.toString()
                 + "\n\tCash: " + this.cashRegister
                 + "\n\tEmployees: " + this.employees.toString()
-                + "\n\tArticles: " + new ListHandler(articles).getFormattedList();
+                + "\n\tArticles: \n" + new ListHandler(articles).getFormattedList();
     }
 
     public List<Employee> getEmployees() {

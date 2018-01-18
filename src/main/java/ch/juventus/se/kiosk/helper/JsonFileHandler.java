@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Further extension to be able to load and save articles in JSON-Format. Feature for the future.
  * @author: Joni
  * @version: 1.0
  * @since: 07.09.2017
@@ -23,7 +24,6 @@ public class JsonFileHandler implements FileHandler {
         this.outputFile = outputFile;
     }
 
-    @Override
     public List<Article> readArticles() {
         List<Article> articles = new ArrayList<>();
         try {
@@ -41,7 +41,6 @@ public class JsonFileHandler implements FileHandler {
         return articles;
     }
 
-    @Override
     public void writeArticles(List<Article> articles) {
         /*Gson gson = new GsonBuilder().create();
         Article article = new Softdrink("Testing Article", new Price("CHF", 10.30), 120);

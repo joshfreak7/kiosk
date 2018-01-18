@@ -24,7 +24,10 @@ public class SerFileHandler implements FileHandler{
         this.outputFile = outputFile;
     }
 
-    @Override
+    /**
+     * Reads articles from a Serialization File.
+     * @return Returns a List of Articles
+     */
     public List<Article> readArticles() {
         Article a;
         List<Article> articles = new ArrayList<>();
@@ -50,7 +53,10 @@ public class SerFileHandler implements FileHandler{
         return articles;
     }
 
-    @Override
+    /**
+     * Saves articles to a Serialization File.
+     * @param articles List of articles to be saved.
+     */
     public void writeArticles(List<Article> articles) {
         FileOutputStream fileOut = null;
         ObjectOutputStream objOut = null;

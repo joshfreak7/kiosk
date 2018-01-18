@@ -3,18 +3,13 @@ package ch.juventus.se.kiosk.controller.usecase;
 import ch.juventus.se.kiosk.error.InsufficientFundsException;
 import ch.juventus.se.kiosk.error.NotMyEmployeeException;
 import ch.juventus.se.kiosk.error.ToYoungForThisException;
-import ch.juventus.se.kiosk.helper.ExcelFileHandler;
-import ch.juventus.se.kiosk.helper.FileHandler;
-import ch.juventus.se.kiosk.helper.ListHandler;
-import ch.juventus.se.kiosk.helper.SerFileHandler;
+import ch.juventus.se.kiosk.helper.*;
 import ch.juventus.se.kiosk.model.Address;
-import ch.juventus.se.kiosk.model.article.Article;
+import ch.juventus.se.kiosk.model.article.*;
 import ch.juventus.se.kiosk.model.person.Customer;
 import ch.juventus.se.kiosk.model.Kiosk;
 import ch.juventus.se.kiosk.model.person.Employee;
 import ch.juventus.se.kiosk.model.person.Supplier;
-import ch.juventus.se.kiosk.model.article.Price;
-import ch.juventus.se.kiosk.model.article.Tobacco;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,10 +26,18 @@ public class DefaultUseCaseService implements UseCaseService {
 
     @Override
     public void customerBuysArticles() {
+        // Import Articles first
+        File inventoryIn = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\kioskArticles.ser");
+        FileHandler fh = new SerFileHandler(inventoryIn, null);
+        List<Article> inventory = fh.readArticles();
+
         StringBuffer sb = new StringBuffer();
 
+        sb.append("******* USECASE: customerBuysArticles *******");
         sb.append("Create Kiosk:"+NEW_LINE);
         Kiosk kiosk = new Kiosk("Testkiosk", new Address("Testingstreet 123",8000, "Zürich"),350.00, new Supplier(new ArrayList()));
+        //kiosk.getArticles().addAll(inventory);
+        kiosk.setArticles(inventory);
         sb.append(kiosk+NEW_LINE);
         sb.append(NEW_LINE);
 
@@ -44,13 +47,17 @@ public class DefaultUseCaseService implements UseCaseService {
         sb.append(NEW_LINE);
 
         sb.append("Add articles to customer's basket:"+NEW_LINE);
-        customer.getBasket().add(new Tobacco("Zigis", new Price("CHF", 7.10), 16));
-        customer.getBasket().add(new Tobacco("Zigis", new Price("CHF", 7.10), 16));
+        //customer.getBasket().add(kiosk.getArticles().get(1));
+        customer.getBasket().add(new Snack("Zweifel Paprika", new Price("CHF", 6.70), SnackType.SALTY));
+        customer.getBasket().add(new Snack("Zweifel Paprika", new Price("CHF", 6.70), SnackType.SALTY));
+        customer.getBasket().add(new Softdrink("RedBull", new Price("CHF", 3.50), 250));
+        customer.getBasket().add(new Softdrink("RedBull", new Price("CHF", 3.50), 250));
+        customer.getBasket().add(new Softdrink("RedBull", new Price("CHF", 3.50), 250));
         sb.append(new ListHandler(customer.getBasket()).getFormattedList()+NEW_LINE);
         sb.append(NEW_LINE);
 
-        sb.append("Add articles to customer's basket:"+NEW_LINE);
-        customer.getBasket().add(new Tobacco("AndereTabak", new Price("CHF", 7.10), 18));
+        sb.append("Add more articles to customer's basket:"+NEW_LINE);
+        customer.getBasket().add(new Snack("Salami", new Price("CHF", 5.8), SnackType.SANDWICH));
         sb.append(new ListHandler(customer.getBasket()).getFormattedList());
         sb.append(NEW_LINE);
 
@@ -63,11 +70,15 @@ public class DefaultUseCaseService implements UseCaseService {
         }
         sb.append("\tCustomer's basket: " + new ListHandler(customer.getBasket()).getFormattedList()+NEW_LINE);
         sb.append("\tKiosk cash: " + kiosk.getCashRegister()+NEW_LINE);
-        sb.append("\tKiosk articles: " + new ListHandler(kiosk.getArticles()).getFormattedList()+NEW_LINE);
+        sb.append("\tKiosk articles: \n" + new ListHandler(kiosk.getArticles()).getFormattedList()+NEW_LINE);
         sb.append(NEW_LINE);
 
+        // Save to TextFile
         String text = sb.toString();
-        // TODO: Textfile erstellen
+        File outputUC = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\customerBuysArticles.txt");
+        TextFileHandler tfh = new TextFileHandler(null, outputUC);
+        tfh.writeUseCase(text);
+
         System.out.println(text);
     }
 
@@ -76,6 +87,7 @@ public class DefaultUseCaseService implements UseCaseService {
 
         StringBuffer sb = new StringBuffer();
 
+        sb.append("******* USECASE: employeeOrdersArticles *******");
         sb.append("Create Kiosk:"+NEW_LINE);
         sb.append("\t..."+NEW_LINE);
         sb.append(NEW_LINE);
@@ -85,15 +97,21 @@ public class DefaultUseCaseService implements UseCaseService {
         sb.append("Kiosk:"+NEW_LINE);
         sb.append("\t..."+NEW_LINE);
 
+        // Save to TextFile
         String text = sb.toString();
-        // TODO: Textfile erstellen
+        File outputUC = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\employeeOrdersArticles.txt");
+        TextFileHandler tfh = new TextFileHandler(null, outputUC);
+        tfh.writeUseCase(text);
+
+        System.out.println(text);
     }
 
     @Override
     public void employeeDoesInventory() {
+        // Import Articles first
         File inventoryIn = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\kioskArticles.ser");
         File inventoryOut = inventoryIn;
-        FileHandler fh = new SerFileHandler(inventoryIn, inventoryOut);
+        FileHandler fh = new SerFileHandler(inventoryIn, null);
         List<Article> inventory = fh.readArticles();
 
         File inventoryInFromExcel = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\inventoryList.xlsx");
@@ -102,13 +120,14 @@ public class DefaultUseCaseService implements UseCaseService {
 
         StringBuffer sb = new StringBuffer();
 
+        sb.append("******* USECASE: employeeDoesInventory *******");
         sb.append("Create Kiosk:"+NEW_LINE);
         Kiosk kiosk = new Kiosk("Testkiosk", new Address("Testingstreet 123",8000, "Zürich"),350.00, new Supplier(new ArrayList()));
         kiosk.setArticles(inventory);
         sb.append(kiosk+NEW_LINE);
         sb.append(NEW_LINE);
 
-        sb.append("Do inventory."+NEW_LINE+"See " + inventoryOutToExcel.getPath());
+        sb.append("Do inventory."+NEW_LINE+"See " + inventoryOutToExcel.getPath() + NEW_LINE);
         Employee empl = new Employee("Test", "Angestellter", "E0123");
         kiosk.getEmployees().add(empl);
         try {
@@ -118,7 +137,12 @@ public class DefaultUseCaseService implements UseCaseService {
         }
         sb.append("Inventory done.");
 
+        // Save to TextFile
         String text = sb.toString();
-        // TODO: Textfile erstellen
+        File outputUC = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\employeeDoesInventory.txt");
+        TextFileHandler tfh = new TextFileHandler(null, outputUC);
+        tfh.writeUseCase(text);
+
+        System.out.println(text);
     }
 }

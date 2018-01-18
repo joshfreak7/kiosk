@@ -14,59 +14,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-        File inputFile = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\articlesIN.json");
-        File outputFile = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\kioskArticles.ser");
-
-        FileHandler fh = new SerFileHandler(inputFile, outputFile);
-
-        List<Article> articles = new ArrayList<>();
-        articles.add(new Softdrink("RedBull", new Price("CHF", 3.50), 250));
-        articles.add(new Snack("Zweifel Chips", new Price("CHF", 6.70), SnackType.SALTY));
-        fh.writeArticles(articles);
+        setUpArticles();
 
         UseCaseService useCaseService = new DefaultUseCaseService();
 
-        //useCaseService.customerBuysArticles();
+        useCaseService.customerBuysArticles();
 
-        //useCaseService.employeeOrdersArticles();
+        useCaseService.employeeOrdersArticles();
 
         useCaseService.employeeDoesInventory();
-
-        /*FileHandler fh = new FileHandler(new File("C:\\Users\\Joni\\Desktop\\input.txt"), new File("C:\\Users\\Joni\\Desktop\\output.txt"));
-        fh.write(fh.read());*/
-
-
-        /*FileReader fr = null;
-        FileWriter fw = null;
-        int i;
-        try {
-            fr = new FileReader("C:\\Users\\Joni\\Desktop\\input.txt");
-            fw = new FileWriter("C:\\Users\\Joni\\Desktop\\output.txt");
-
-            while((i=fr.read()) != -1){
-                System.out.println((char)i);
-                fw.write(i);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if(fr != null){
-                try {
-                    fr.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if(fw != null){
-                try {
-                    fw.flush();
-                    fw.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }*/
-
 
 
         /*Kiosk kiosk = new Kiosk("TestKiosk", new Address("Mustergasse", 12, 1234, "Entenhausen"),70.00);
@@ -94,44 +50,52 @@ public class Main {
             System.out.println(employees.get(i).toString());
         }*/
 
-
-        /*System.out.println("Anna is a palindrom: " + palindrom("Anna"));
-        System.out.println("Korb is a palindrom: " + palindrom("Korb"));
-        System.out.println("Mein Computer is a palindrom: " + palindrom("Mein Computer"));
-        System.out.println("!+Level+! is a palindrom: " + palindrom("!+Level+!"));
-        System.out.println("Anna Bob Anna is a palindrom: " + palindrom("Anna Bob Anna"));
-        System.out.println("Kamel is a palindrom: " + palindrom("Kamel"));
-        System.out.println("Stein is a palindrom: " + palindrom("Stein"));
-        System.out.println("Sugus is a palindrom: " + palindrom("Sugus"));
-        System.out.println("Anananas is a palindrom: " + palindrom("Anananas"));
-        System.out.println("Anna Bob Anna is a palindrom: " + palindrom("Anna Bob Anna"));*/
-
     }
 
-    /*public static boolean palindrom(String name){
-        name = name.toLowerCase();
+    public static void setUpArticles(){
+        File outputFile = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\kioskArticles.ser");
 
-        if( name.length() < 2 ){
-            return true;
+        FileHandler fh = new SerFileHandler(null, outputFile);
+
+        List<Article> articles = new ArrayList<>();
+        // Adding 10 salty Snacks
+        for(int i = 0; i < 10; i++) {
+            articles.add(new Snack("Zweifel Paprika", new Price("CHF", 6.70), SnackType.SALTY));
+        }
+        // Adding 20 sweet Snacks
+        for(int i = 0; i < 20; i++) {
+            articles.add(new Snack("Zimt Kaugummi", new Price("CHF", 1.50), SnackType.SWEET));
+        }
+        // Adding 5 Alcohol (AR 20)
+        for(int i = 0; i < 5; i++) {
+            articles.add(new Alcohol("Vodka 0.7L", new Price("CHF", 20.0), 700, 18));
+        }
+        // Adding 10 fruit Snacks
+        for(int i = 0; i < 10; i++) {
+            articles.add(new Snack("Apfel", new Price("CHF", 1.0), SnackType.FRUIT));
+        }
+        // Adding 15 Alcohol (AR 16)
+        for(int i = 0; i < 10; i++) {
+            articles.add(new Alcohol("Quöllfrisch 0.5L", new Price("CHF", 1.7), 500, 16));
+        }
+        // Adding 15 RedBull
+        for(int i = 0; i < 15; i++) {
+            articles.add(new Softdrink("RedBull", new Price("CHF", 3.50), 250));
+        }
+        // Adding 7 Tobacco (AR 16)
+        for(int i = 0; i < 15; i++) {
+            articles.add(new Tobacco("Winston BLUE", new Price("CHF", 8.10), 16));
+        }
+        // Adding 10 Newspaper
+        for(int i = 0; i < 15; i++) {
+            articles.add(new Newspaper("NZZ", new Price("CHF", 3.20), NewspaperType.LOCAL));
+        }
+        // Adding 5 sandwich Snacks
+        for(int i = 0; i < 5; i++) {
+            articles.add(new Snack("Salami", new Price("CHF", 5.8), SnackType.SANDWICH));
         }
 
-        if( name.charAt(0) == name.charAt( name.length() - 1 ) ){
-            return palindrom( name.substring( 1, name.length() - 1 ) );
-        }
-
-        return false;
-    }*/
-
-    /*public void withdraw(double amount) throws InsufficientFundsException {
-        if(amount <= kiosk.getBalance()){
-            balance -= amount;
-        } else {
-            throw new InsufficientFundsException("Not enough balance available: Balance: " + balance +
-                    " Amount: " + amount);
-        }
-    }*/
-
-
-
+        fh.writeArticles(articles);
+    }
 }
 

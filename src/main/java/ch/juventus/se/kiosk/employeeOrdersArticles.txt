@@ -1,0 +1,6 @@
+Create Kiosk:
+	...
+
+Order articles:
+Kiosk:
+	...
