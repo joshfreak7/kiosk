@@ -35,26 +35,23 @@ public class DefaultUseCaseService implements UseCaseService {
         sb.append(NEW_LINE);
 
         sb.append("Add articles to customer's basket:"+NEW_LINE);
-        try {
-            customer.addArticleToBasket(new Tobacco("Zigis", new Price("CHF", 7.10), 5));
-        }catch(InsufficientFundsException ife) {
-            sb.append(ife.getMessage());
-        }
+        customer.getBasket().add(new Tobacco("Zigis", new Price("CHF", 7.10), 16));
+        customer.getBasket().add(new Tobacco("Zigis", new Price("CHF", 7.10), 16));
         sb.append(customer.getBasketFormatted()+NEW_LINE);
         sb.append(NEW_LINE);
 
         sb.append("Add articles to customer's basket:"+NEW_LINE);
-        try {
-            customer.addArticleToBasket(new Tobacco("ZigisAnderi", new Price("CHF", 7.10), 2));
-        }catch(InsufficientFundsException ife) {
-            sb.append(ife.getMessage());
-        }
+        customer.getBasket().add(new Tobacco("AndereTabak", new Price("CHF", 7.10), 18));
         sb.append(customer.getBasketFormatted());
         sb.append(NEW_LINE);
 
 
         sb.append("Checkout customer:"+NEW_LINE);
-        sb.append("\t..."+NEW_LINE);
+        try{
+            kiosk.checkout(customer);
+        }catch(InsufficientFundsException ife) {
+            sb.append(ife.getMessage());
+        }
 
         String text = sb.toString();
         // TODO: Textfile erstellen

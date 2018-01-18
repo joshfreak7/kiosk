@@ -9,8 +9,8 @@ public abstract class Drink extends Article {
 
     private double volume;
 
-    public Drink(String title, Price price, double volume, int count) {
-        super(title, price, count);
+    public Drink(String title, Price price, double volume) {
+        super(title, price);
         this.volume = volume;
     }
 

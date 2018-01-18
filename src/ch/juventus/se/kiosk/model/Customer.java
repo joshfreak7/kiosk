@@ -3,8 +3,7 @@ package ch.juventus.se.kiosk.model;
 import ch.juventus.se.kiosk.error.InsufficientFundsException;
 import ch.juventus.se.kiosk.model.article.Article;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -25,22 +24,13 @@ public class Customer extends Person {
         this.basket = new ArrayList<>();
     }
 
-    public void addArticleToBasket(Article article) throws InsufficientFundsException {
-        if(cash >= article.getCost()) {
-            cash -= article.getCost();
-            if(!basket.contains(article))
-                basket.add(article);
-            else {
-                Article a = basket.get(basket.indexOf(article));
-                a.setCount(a.getCount() + article.getCount());
-            }
-        } else {
-            throw new InsufficientFundsException("NOT ENOUGH CASH! Article(s) were NOT added to the basket!\n");
-        }
-    }
-
     public String getBasketFormatted() {
-        return basket.stream().map(article -> "\t" + article.toString() + "\n").collect(Collectors.joining());
+        //return basket.stream().map(article -> "\t" + article.toString() + "\n").collect(Collectors.joining());
+        //return basket.stream().map(article -> "\t" + Collections.frequency(basket, article.toString())
+        //        + " x " + article.toString() + "\n").collect(Collectors.joining());
+        Set<Article> uniqueSet = new HashSet<>(basket);
+        return uniqueSet.stream().map(article -> "\t" + Collections.frequency(basket, article)
+                + " x " + article.toString() + "\n").collect(Collectors.joining());
     }
 
     @Override
@@ -52,6 +42,10 @@ public class Customer extends Person {
 
     public double getCash() {
         return cash;
+    }
+
+    public void setCash(double cash) {
+        this.cash = cash;
     }
 
     public int getAge() {

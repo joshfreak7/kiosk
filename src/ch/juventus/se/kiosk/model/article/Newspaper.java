@@ -9,8 +9,8 @@ public class Newspaper extends Article {
 
     private NewspaperType cat;
 
-    public Newspaper(String title, Price price, NewspaperType cat, int count) {
-        super(title, price, count);
+    public Newspaper(String title, Price price, NewspaperType cat) {
+        super(title, price);
         this.cat = cat;
     }
 

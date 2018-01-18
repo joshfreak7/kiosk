@@ -9,22 +9,20 @@ package ch.juventus.se.kiosk.model.article;
 public abstract class Article implements Comparable{
 
     private String title;
-    private Price pricePerArticle;
-    private int count;
+    private Price price;
 
-    public Article(String title, Price pricePerArticle, int count) {
+    public Article(String title, Price price) {
         this.title = title;
-        this.pricePerArticle = pricePerArticle;
-        this.count = count;
+        this.price = price;
     }
 
     public double getCost(){
-        return pricePerArticle.getAmount() * count;
+        return price.getAmount();
     }
 
     @Override
     public String toString(){
-        return this.count + " x " + this.title + ": " + this.pricePerArticle;
+        return this.title + ": " + this.price;
     }
 
     @Override
@@ -53,22 +51,14 @@ public abstract class Article implements Comparable{
     }
 
     public Price getPricePerArticle() {
-        return pricePerArticle;
+        return price;
     }
 
     public double getAmountPerArticle() {
-        return pricePerArticle.getAmount();
+        return price.getAmount();
     }
 
     public String getCurrency() {
-        return pricePerArticle.getCurrency();
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
+        return price.getCurrency();
     }
 }

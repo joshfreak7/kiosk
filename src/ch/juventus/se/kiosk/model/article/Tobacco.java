@@ -7,20 +7,22 @@ package ch.juventus.se.kiosk.model.article;
  */
 public class Tobacco extends Article {
 
-    private static final int AGE = 16;
+    //private static final int AGE = 16;
+    private int ageRating;
 
-    public Tobacco(String title, Price price, int count) {
-        super(title, price, count);
+    public Tobacco(String title, Price price, int ageRating) {
+        super(title, price);
+        this.ageRating = ageRating;
     }
 
     @Override
     public String toString(){
         return super.toString()
                 + " (" + this.getClass().getSimpleName()
-                + " age rating " + AGE + ")";
+                + " age rating " + ageRating + ")";
     }
 
-    public static int getAGE() {
-        return AGE;
+    public int getAgeRating() {
+        return ageRating;
     }
 }

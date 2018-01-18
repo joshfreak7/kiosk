@@ -31,6 +31,8 @@ public abstract class Person implements Comparable{
         return this.firstName.compareTo(p.getFirstName());
     }
 
+    public String getFullName() { return firstName + " " + lastName;}
+
     public String getFirstName() {
         return firstName;
     }

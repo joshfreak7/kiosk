@@ -7,8 +7,8 @@ package ch.juventus.se.kiosk.model.article;
  */
 public class Softdrink extends Drink {
 
-    public Softdrink(String title, Price price, double volume, int count) {
-        super(title, price, volume, count);
+    public Softdrink(String title, Price price, double volume) {
+        super(title, price, volume);
     }
 
     @Override

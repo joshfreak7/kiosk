@@ -9,8 +9,8 @@ public class Snack extends Article {
 
     private SnackType cat;
 
-    public Snack(String title, Price price, SnackType cat, int count) {
-        super(title, price, count);
+    public Snack(String title, Price price, SnackType cat) {
+        super(title, price);
         this.cat = cat;
     }
 

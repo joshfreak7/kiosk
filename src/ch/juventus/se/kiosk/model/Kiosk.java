@@ -1,9 +1,11 @@
 package ch.juventus.se.kiosk.model;
 
+import ch.juventus.se.kiosk.error.InsufficientFundsException;
 import ch.juventus.se.kiosk.model.article.Article;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Kiosk sells Articles to customers. Employees working at the Kiosk.
@@ -39,6 +41,22 @@ public class Kiosk {
         this.articles = articles;
         this.cashRegister = cashRegister;
         this.supplier = supplier;
+    }
+
+    public void checkout(Customer customer) throws InsufficientFundsException {
+        double totalCost = customer.getBasket().stream().mapToDouble(a -> a.getCost()).sum();
+        if(customer.getCash() >= totalCost) {
+            customer.setCash(customer.getCash() - totalCost);
+            cashRegister += totalCost;
+            articles.removeAll(customer.getBasket());
+            customer.getBasket().clear();
+        } else {
+            throw new InsufficientFundsException("Dear " + customer.getFullName() + ", you do NOT have enough cash! Please put some articles back!\n");
+        }
+    }
+
+    public boolean isArticleAvailable(Article article){
+        return articles.contains(article);
     }
 
     /**
