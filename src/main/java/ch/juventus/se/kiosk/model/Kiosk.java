@@ -10,6 +10,7 @@ import ch.juventus.se.kiosk.model.article.Article;
 import ch.juventus.se.kiosk.model.person.Customer;
 import ch.juventus.se.kiosk.model.person.Employee;
 import ch.juventus.se.kiosk.model.person.Supplier;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class Kiosk {
     private List<Article> articles;
     private double cashRegister;
     private Supplier supplier;
+    final static Logger logger = Logger.getLogger(Kiosk.class);
 
 
     public Kiosk(String name, Address address, double cashRegister, Supplier supplier) {
@@ -58,11 +60,14 @@ public class Kiosk {
      * @throws ToYoungForThisException Thrown, when the customer is to young for certain articles
      */
     public void checkout(Customer customer) throws KioskClosedException, InsufficientFundsException, ToYoungForThisException {
+        logger.debug("Customer BasketSize before checkout: " + customer.getBasket().size());
+        logger.debug("CashRegister of Kiosk: " + this.getName() + " before checkout has amount of " + cashRegister);
         if(isOpen) {
             ListHandler lh = new ListHandler(customer.getBasket());
             List<Article> toYoung = lh.checkAgeRating(customer.getAge());
             if (!toYoung.isEmpty()) {
                 customer.getBasket().removeAll(toYoung);
+                logger.debug("Customer: " + customer.toString() + " is to young to buy articles: " + toYoung);
                 throw new ToYoungForThisException("Dear " + customer.getFullName() + ", you're to young to buy the following Article(s): \n" + toYoung.toString());
             }
             double totalCost = lh.getTotalAmount();
@@ -72,11 +77,14 @@ public class Kiosk {
                 customer.getBasket().stream().forEach(article -> articles.remove(article));
                 customer.getBasket().clear();
             } else {
+                logger.debug("Customer: " + customer.toString() + " has not enough cash: " + customer.getCash() + " Total Cost: " + totalCost);
                 throw new InsufficientFundsException("Dear " + customer.getFullName() + ", you do NOT have enough cash! Please put some articles back!\n");
             }
         } else {
             throw new KioskClosedException("Dear " + customer.getFullName() + ", this kiosk is currently closed! Please come back later!\n");
         }
+        logger.debug("Customer: " + customer.toString() + " BasketSize after checkout: " + customer.getBasket().size());
+        logger.debug("CashRegister of Kiosk: " + this.getName() + " after checkout has amount of " + cashRegister);
     }
 
     /**
@@ -87,9 +95,9 @@ public class Kiosk {
      */
     public void doInventory(Employee empl, FileHandler fh) throws NotMyEmployeeException{
         if(!employees.contains(empl)) {
+            logger.error("Employee: " + empl.toString() + " tried to do the inventory of Kiosk: " + this.getName());
             throw new NotMyEmployeeException("You're not an Employee of this Kiosk! Therefore, you cannot do the inventory for this Kiosk!");
         } else {
-            // TODO Logging
             empl.doInventory(articles, fh);
         }
     }
@@ -101,10 +109,12 @@ public class Kiosk {
      */
     public void setOpen(Employee empl, boolean open) throws NotMyEmployeeException {
         if(!employees.contains(empl)) {
+            logger.error("Employee: " + empl.toString() + " tried to open/close Kiosk: " + this.getName());
             throw new NotMyEmployeeException("You're not an Employee of this Kiosk! Therefore, you cannot open/close this Kiosk!");
         } else {
-            // TODO Logging
+            logger.info("Employee: " + empl.toString() + " open/close Kiosk: " + this.getName());
             isOpen = open;
+            logger.debug("Kiosk: " + this.getName() + " is open: " + isOpen);
         }
     }
 
@@ -115,7 +125,9 @@ public class Kiosk {
      * @throws NotMyEmployeeException Thrown when employee is not a member of the kiosk.
      */
     public void orderArticles(Employee empl, List<Article> articlesToBeOrdered) throws NotMyEmployeeException, InsufficientFundsException {
+        logger.debug("CashRegister of Kiosk: " + this.getName() + " before ordering articles has amount of " + cashRegister);
         if(!employees.contains(empl)) {
+            logger.error("Employee: " + empl.toString() + " tried to order articles for Kiosk: " + this.getName());
             throw new NotMyEmployeeException("You're not an Employee of this Kiosk! Therefore, you cannot order Articles for this Kiosk!");
         } else {
             ListHandler lh = new ListHandler(articlesToBeOrdered);
@@ -125,9 +137,11 @@ public class Kiosk {
                 articlesToBeOrdered.stream().forEach(article -> articles.add(article));
                 articlesToBeOrdered.stream().forEach(article -> supplier.getStack().remove(article));
             } else {
+                logger.error("Kiosk: " + this.getName() + " has not enough cash in the bank. CashRegister: " + cashRegister + " Total cost for orders: " + totalCost);
                 throw new InsufficientFundsException("Dear Employee " + empl.getFullName() + ", your kiosk does NOT have enough cash! Please order less articles!\n");
             }
         }
+        logger.debug("CashRegister of Kiosk: " + this.getName() + " after ordering articles has amount of " + cashRegister);
     }
 
     @Override

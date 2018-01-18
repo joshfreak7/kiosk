@@ -25,7 +25,6 @@ public class Employee extends Person{
     public Employee(String firstName, String lastName, String employeeId) {
         super(firstName, lastName);
         this.employeeId = employeeId;
-        logger.info("Start of setUp");
     }
 
     /**
@@ -34,7 +33,9 @@ public class Employee extends Person{
      * @param fh The fileHandler to export inventoryList
      */
     public void doInventory(List<Article> inventoryList, FileHandler fh) {
+        logger.info("Employee: " + toString() + " does inventory.");
         fh.writeArticles(inventoryList);
+        logger.info("Employee: " + toString() + " has done inventory.");
     }
 
     public String getEmployeeId() {

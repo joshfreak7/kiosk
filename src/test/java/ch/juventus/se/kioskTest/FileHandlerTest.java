@@ -15,6 +15,7 @@ public class FileHandlerTest {
 
     @Before
     public void setUp() {
+        // TODO Unfortunately, no time left
         /*serFH = new SerFileHandler();
         txtFH = new TextFileHandler();
         excelFH = new ExcelFileHandler();
@@ -23,16 +24,41 @@ public class FileHandlerTest {
 
     @Test
     public void testSerFileHandlerRead() {
-
+        // TODO Unfortunately, no time left
     }
 
     @Test
     public void testSerFileHandlerWrite() {
+        // TODO Unfortunately, no time left
+    }
 
+    @Test
+    public void testTxtFileHandlerRead() {
+        // TODO Unfortunately, no time left
+    }
+
+    @Test
+    public void testTxtFileHandlerWrite() {
+        // TODO Unfortunately, no time left
+    }
+
+    @Test
+    public void testExcelFileHandlerRead() {
+        // TODO Unfortunately, no time left
     }
 
     @Test
     public void testExcelFileHandlerWrite() {
+        // TODO Unfortunately, no time left
+    }
 
+    @Test
+    public void testJsonFileHandlerRead() {
+        // TODO Unfortunately, no time left
+    }
+
+    @Test
+    public void testJsonFileHandlerWrite() {
+        // TODO Unfortunately, no time left
     }
 }
