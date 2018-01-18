@@ -104,6 +104,7 @@ public class Kiosk {
 
     /**
      * Close or open the kiosk. Only Employees of this kiosk can do so.
+     * @param empl The Employee, who wants to open or close the Kiosk.
      * @param open describes whether the kiosk has opened or closed.
      * @throws NotMyEmployeeException Thrown when employee is not a member of the kiosk.
      */
