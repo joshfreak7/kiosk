@@ -24,37 +24,11 @@ public class Main {
 
         useCaseService.employeeDoesInventory();
 
-
-        /*Kiosk kiosk = new Kiosk("TestKiosk", new Address("Mustergasse", 12, 1234, "Entenhausen"),70.00);
-
-        System.out.println("Before withdraw: " + kiosk.getBalance());
-
-        try {
-            kiosk.withdraw(100.00);
-        } catch (InsufficientFundsException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("After withdraw: " + kiosk.getBalance());*/
-
-        /*List<Employee> employees = new ArrayList<Employee>();
-
-        employees.add(new Employee("Hans", "Muster"));
-        employees.add(new Employee("Peter", "Kuster"));
-        employees.add(new Employee("Peter", "Keller"));
-        employees.add(new Employee("Lisa", "Muster"));
-
-        Collections.sort(employees);
-
-        for(int i = 0 ; i < employees.size(); i++){
-            System.out.println(employees.get(i).toString());
-        }*/
-
     }
 
     public static void setUpArticles(){
         File outputFile = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\kioskArticles.ser");
-
+        File outputFileSuppl = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\supplierArticles.ser");
         FileHandler fh = new SerFileHandler(null, outputFile);
 
         List<Article> articles = new ArrayList<>();
@@ -95,6 +69,9 @@ public class Main {
             articles.add(new Snack("Salami", new Price("CHF", 5.8), SnackType.SANDWICH));
         }
 
+        fh.writeArticles(articles);
+
+        fh = new SerFileHandler(null, outputFileSuppl);
         fh.writeArticles(articles);
     }
 }

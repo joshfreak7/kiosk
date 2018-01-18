@@ -62,6 +62,11 @@ public class ListHandler {
         return articlesList.stream().mapToDouble(Article::getAmount).sum();
     }
 
+    /**
+     * Checks if there are articles for which the customer is to young to buy.
+     * @param ageOfCustomer Age of the customer
+     * @return Returns a list of all the articles, which the customer cannot buy.
+     */
     public List<Article> checkAgeRating(int ageOfCustomer) {
         List<Article> toYoungForTheseArticles = new ArrayList<>();
         for (Article a : articlesSet) {

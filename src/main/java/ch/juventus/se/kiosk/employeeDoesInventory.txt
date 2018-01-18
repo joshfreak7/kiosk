@@ -1,8 +1,10 @@
+******* USECASE: employeeDoesInventory *******
 Create Kiosk:
 	Name: Testkiosk
 	Address: Testingstreet 123, 8000 Zürich
 	Cash: 350.0
-	Employees: []
+	Employees: [EmployeeID: E0123, 	Name: Test Angestellter]
+	Open: false
 	Articles: 
 		15 x NZZ: CHF 3.2
 		5 x Salami: CHF 5.8 (Snack type SANDWICH)

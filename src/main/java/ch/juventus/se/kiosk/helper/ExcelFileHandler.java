@@ -68,7 +68,6 @@ public class ExcelFileHandler implements FileHandler{
         XSSFSheet sheet = workbook.createSheet("Inventory - List of Articles");
 
         ListHandler lh = new ListHandler(articles);
-        System.out.println("Creating excel");
 
         Row row = sheet.createRow(0);
         Cell cell = row.createCell(0);
@@ -82,6 +81,9 @@ public class ExcelFileHandler implements FileHandler{
         int rowNum = 1;
 
         Set<Article> articlesSet = new HashSet<>(articles);
+
+        // Sorting reversed (Article-Price)
+        articlesSet.stream().sorted(Comparator.comparing(Article::getPrice).reversed());
         for (Article article : articlesSet) {
             row = sheet.createRow(rowNum++);
             cell = row.createCell(0);
@@ -109,6 +111,5 @@ public class ExcelFileHandler implements FileHandler{
             e.printStackTrace();
         }
 
-        System.out.println("Done");
     }
 }

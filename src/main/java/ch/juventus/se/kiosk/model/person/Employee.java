@@ -28,6 +28,11 @@ public class Employee extends Person{
         logger.info("Start of setUp");
     }
 
+    /**
+     * Employee does inventory. Checks what articles kiosk still have.
+     * @param inventoryList The inventory currently available for the kiosk
+     * @param fh The fileHandler to export inventoryList
+     */
     public void doInventory(List<Article> inventoryList, FileHandler fh) {
         fh.writeArticles(inventoryList);
     }
@@ -38,7 +43,7 @@ public class Employee extends Person{
 
     @Override
     public String toString(){
-        return "EmployeeID: " + employeeId + "\n" + super.toString();
+        return "EmployeeID: " + employeeId + ", " + super.toString();
     }
 
 

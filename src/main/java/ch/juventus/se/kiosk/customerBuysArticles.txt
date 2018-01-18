@@ -1,8 +1,10 @@
+******* USECASE: customerBuysArticles *******
 Create Kiosk:
 	Name: Testkiosk
 	Address: Testingstreet 123, 8000 Zürich
 	Cash: 350.0
-	Employees: []
+	Employees: [EmployeeID: E0123, 	Name: Test Angestellter]
+	Open: true
 	Articles: 
 		15 x NZZ: CHF 3.2
 		5 x Salami: CHF 5.8 (Snack type SANDWICH)
@@ -25,7 +27,7 @@ Add articles to customer's basket:
 		3 x RedBull: CHF 3.5 (Softdrink volume in dl 2.5)
 
 
-Add articles to customer's basket:
+Add more articles to customer's basket:
 		1 x Salami: CHF 5.8 (Snack type SANDWICH)
 		2 x Zweifel Paprika: CHF 6.7 (Snack type SALTY)
 		3 x RedBull: CHF 3.5 (Softdrink volume in dl 2.5)
@@ -33,7 +35,8 @@ Add articles to customer's basket:
 Checkout customer:
 	Customer's basket: 
 	Kiosk cash: 379.7
-	Kiosk articles: 		15 x NZZ: CHF 3.2
+	Kiosk articles: 
+		15 x NZZ: CHF 3.2
 		4 x Salami: CHF 5.8 (Snack type SANDWICH)
 		5 x Vodka 0.7L: CHF 20.0 (Alcohol age rating 18, volume in dl 7.0)
 		10 x Apfel: CHF 1.0 (Snack type FRUIT)

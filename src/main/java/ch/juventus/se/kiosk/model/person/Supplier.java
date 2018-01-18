@@ -1,5 +1,6 @@
 package ch.juventus.se.kiosk.model.person;
 
+import ch.juventus.se.kiosk.helper.ListHandler;
 import ch.juventus.se.kiosk.model.article.Article;
 import ch.juventus.se.kiosk.model.person.Person;
 
@@ -17,6 +18,12 @@ public class Supplier extends Person {
     public Supplier(List<Article> stack) {
         super();
         this.stack = stack;
+    }
+
+    @Override
+    public String toString(){
+        return "\tName: " + super.getFullName()
+                + "\n\tStack: \n" + new ListHandler(stack).getFormattedList();
     }
 
     public List<Article> getStack() {
