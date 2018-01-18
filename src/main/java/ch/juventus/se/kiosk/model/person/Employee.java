@@ -1,10 +1,9 @@
-package ch.juventus.se.kiosk.model;
+package ch.juventus.se.kiosk.model.person;
 
 import ch.juventus.se.kiosk.helper.FileHandler;
 import ch.juventus.se.kiosk.model.article.Article;
 import org.apache.log4j.Logger;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -29,8 +28,8 @@ public class Employee extends Person{
         logger.info("Start of setUp");
     }
 
-    public void doInventory(List<Article> inventoryList, File outputFile) {
-        new FileHandler(outputFile).exportArticlesToExcel(inventoryList);
+    public void doInventory(List<Article> inventoryList, FileHandler fh) {
+        fh.writeArticles(inventoryList);
     }
 
     public String getEmployeeId() {

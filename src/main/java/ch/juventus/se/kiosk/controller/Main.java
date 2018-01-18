@@ -3,6 +3,7 @@ package ch.juventus.se.kiosk.controller;
 import ch.juventus.se.kiosk.controller.usecase.DefaultUseCaseService;
 import ch.juventus.se.kiosk.controller.usecase.UseCaseService;
 import ch.juventus.se.kiosk.helper.FileHandler;
+import ch.juventus.se.kiosk.helper.SerFileHandler;
 import ch.juventus.se.kiosk.model.article.*;
 
 import java.io.File;
@@ -14,23 +15,20 @@ public class Main {
     public static void main(String[] args) {
 
         File inputFile = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\articlesIN.json");
-        File outputFile = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\inventoryList.xlsx");
+        File outputFile = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\kioskArticles.ser");
 
-        FileHandler fh = new FileHandler(inputFile, outputFile);
+        FileHandler fh = new SerFileHandler(inputFile, outputFile);
 
-        //fh.exportArticlesToJSON(new ArrayList<Article>());
-
-        //fh.importArticlesFromJSON();
         List<Article> articles = new ArrayList<>();
         articles.add(new Softdrink("RedBull", new Price("CHF", 3.50), 250));
         articles.add(new Snack("Zweifel Chips", new Price("CHF", 6.70), SnackType.SALTY));
-        fh.exportArticlesToExcel(articles);
+        fh.writeArticles(articles);
 
         UseCaseService useCaseService = new DefaultUseCaseService();
 
-        useCaseService.customerBuysArticles();
+        //useCaseService.customerBuysArticles();
 
-        useCaseService.employeeOrdersArticles();
+        //useCaseService.employeeOrdersArticles();
 
         useCaseService.employeeDoesInventory();
 

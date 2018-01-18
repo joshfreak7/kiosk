@@ -1,4 +1,4 @@
-package ch.juventus.se.kiosk.model;
+package ch.juventus.se.kiosk.model.person;
 
 import ch.juventus.se.kiosk.helper.ListHandler;
 import ch.juventus.se.kiosk.model.article.Article;

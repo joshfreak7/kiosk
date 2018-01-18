@@ -1,11 +1,13 @@
 package ch.juventus.se.kiosk.model.article;
 
+import java.io.Serializable;
+
 /**
  * @author: Joni
  * @version: 1.0
  * @since: 07.09.2017
  */
-public class Price {
+public class Price implements Serializable{
     private String currency;
     private double amount;
 

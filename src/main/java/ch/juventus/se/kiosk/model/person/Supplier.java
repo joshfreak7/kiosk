@@ -1,6 +1,7 @@
-package ch.juventus.se.kiosk.model;
+package ch.juventus.se.kiosk.model.person;
 
 import ch.juventus.se.kiosk.model.article.Article;
+import ch.juventus.se.kiosk.model.person.Person;
 
 import java.util.List;
 

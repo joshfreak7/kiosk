@@ -1,6 +1,6 @@
 package ch.juventus.se.kioskTest;
 
-import ch.juventus.se.kiosk.model.Employee;
+import ch.juventus.se.kiosk.model.person.Employee;
 import org.junit.Before;
 import org.junit.Test;
 

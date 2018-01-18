@@ -1,4 +1,4 @@
-package ch.juventus.se.kiosk.model;
+package ch.juventus.se.kiosk.model.person;
 
 /**
  * This class simply represents a Person with First and LastName.

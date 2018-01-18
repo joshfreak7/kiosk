@@ -3,10 +3,13 @@ package ch.juventus.se.kiosk.model;
 import ch.juventus.se.kiosk.error.InsufficientFundsException;
 import ch.juventus.se.kiosk.error.NotMyEmployeeException;
 import ch.juventus.se.kiosk.error.ToYoungForThisException;
+import ch.juventus.se.kiosk.helper.FileHandler;
 import ch.juventus.se.kiosk.helper.ListHandler;
 import ch.juventus.se.kiosk.model.article.Article;
+import ch.juventus.se.kiosk.model.person.Customer;
+import ch.juventus.se.kiosk.model.person.Employee;
+import ch.juventus.se.kiosk.model.person.Supplier;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,12 +67,12 @@ public class Kiosk {
         }
     }
 
-    public void doInventory(Employee empl, File outputFile) throws NotMyEmployeeException{
+    public void doInventory(Employee empl, FileHandler fh) throws NotMyEmployeeException{
         if(!employees.contains(empl)) {
             throw new NotMyEmployeeException("You're not an Employee of this Kiosk! Therefore, you cannot do the inventory for this Kiosk!");
         } else {
             // TODO Logging
-            empl.doInventory(articles, outputFile);
+            empl.doInventory(articles, fh);
         }
     }
 
@@ -119,5 +122,29 @@ public class Kiosk {
 
     public Address getAddress() {
         return address;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
+    }
+
+    public void setCashRegister(double cashRegister) {
+        this.cashRegister = cashRegister;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 }
