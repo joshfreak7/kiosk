@@ -8,3 +8,5 @@ out/
 resources/
 
 kiosk\.iml
+
+target/

@@ -50,11 +50,11 @@ public abstract class Article implements Comparable{
         return title;
     }
 
-    public Price getPricePerArticle() {
+    public Price getPrice() {
         return price;
     }
 
-    public double getAmountPerArticle() {
+    public double getAmount() {
         return price.getAmount();
     }
 
