@@ -31,7 +31,7 @@ public class DefaultUseCaseService implements UseCaseService {
         sb.append("******* USECASE: customerBuysArticles *******"+NEW_LINE);
 
         // Import Articles for Kiosk
-        File inventoryIn = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\kioskArticles.ser");
+        File inventoryIn = new File("./kioskArticles.ser");
         FileHandler fh = new SerFileHandler(inventoryIn, null);
         List<Article> inventory = fh.readArticles();
 
@@ -85,7 +85,7 @@ public class DefaultUseCaseService implements UseCaseService {
 
         // Save to TextFile
         String text = sb.toString();
-        File outputUC = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\customerBuysArticles.txt");
+        File outputUC = new File("./customerBuysArticles.txt");
         TextFileHandler tfh = new TextFileHandler(null, outputUC);
         tfh.writeUseCase(text);
 
@@ -98,12 +98,12 @@ public class DefaultUseCaseService implements UseCaseService {
         sb.append("******* USECASE: employeeOrdersArticles *******"+NEW_LINE);
 
         // Import Articles for Kiosk
-        File inventoryIn = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\kioskArticles.ser");
+        File inventoryIn = new File("./kioskArticles.ser");
         FileHandler fh = new SerFileHandler(inventoryIn, null);
         List<Article> inventoryKiosk = fh.readArticles();
 
         // Import Articles for Supplier
-        inventoryIn = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\supplierArticles.ser");
+        inventoryIn = new File("./supplierArticles.ser");
         fh = new SerFileHandler(inventoryIn, null);
         List<Article> stackSupplier = fh.readArticles();
 
@@ -147,7 +147,7 @@ public class DefaultUseCaseService implements UseCaseService {
 
         // Save to TextFile
         String text = sb.toString();
-        File outputUC = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\employeeOrdersArticles.txt");
+        File outputUC = new File("./employeeOrdersArticles.txt");
         TextFileHandler tfh = new TextFileHandler(null, outputUC);
         tfh.writeUseCase(text);
 
@@ -160,12 +160,12 @@ public class DefaultUseCaseService implements UseCaseService {
         sb.append("******* USECASE: employeeDoesInventory *******"+NEW_LINE);
 
         // Import Articles first
-        File inventoryIn = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\kioskArticles.ser");
+        File inventoryIn = new File("./kioskArticles.ser");
         File inventoryOut = inventoryIn;
         FileHandler fh = new SerFileHandler(inventoryIn, null);
         List<Article> inventory = fh.readArticles();
 
-        File inventoryInFromExcel = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\inventoryList.xlsx");
+        File inventoryInFromExcel = new File("./inventoryList.xlsx");
         File inventoryOutToExcel = inventoryInFromExcel;
         fh = new ExcelFileHandler(inventoryIn, inventoryOutToExcel);
 
@@ -189,7 +189,7 @@ public class DefaultUseCaseService implements UseCaseService {
 
         // Save to TextFile
         String text = sb.toString();
-        File outputUC = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\employeeDoesInventory.txt");
+        File outputUC = new File("./employeeDoesInventory.txt");
         TextFileHandler tfh = new TextFileHandler(null, outputUC);
         tfh.writeUseCase(text);
 

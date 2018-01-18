@@ -27,8 +27,8 @@ public class Main {
     }
 
     public static void setUpArticles(){
-        File outputFile = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\kioskArticles.ser");
-        File outputFileSuppl = new File("C:\\Users\\Joni\\IdeaProjects\\kiosk\\src\\main\\java\\ch\\juventus\\se\\kiosk\\supplierArticles.ser");
+        File outputFile = new File("./kioskArticles.ser");
+        File outputFileSuppl = new File("./supplierArticles.ser");
         FileHandler fh = new SerFileHandler(null, outputFile);
 
         List<Article> articles = new ArrayList<>();
