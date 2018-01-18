@@ -5,9 +5,9 @@ package ch.juventus.se.kiosk.error;
  * @version: 1.0
  * @since: 07.09.2017
  */
-public class InsufficientFundsException extends Exception {
+public class NotMyEmployeeException extends Exception {
 
-    public InsufficientFundsException(String message) {
+    public NotMyEmployeeException(String message) {
         super(message);
     }
 }

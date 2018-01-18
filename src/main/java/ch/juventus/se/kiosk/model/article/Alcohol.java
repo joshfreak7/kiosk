@@ -1,6 +1,7 @@
 package ch.juventus.se.kiosk.model.article;
 
 /**
+ * An article of type Alcohol which extends a normal Drink in having an age-rating.
  * @author: Joni
  * @version: 1.0
  * @since: 07.09.2017

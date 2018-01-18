@@ -1,9 +1,12 @@
 package ch.juventus.se.kiosk.model;
 
 import ch.juventus.se.kiosk.error.InsufficientFundsException;
+import ch.juventus.se.kiosk.error.NotMyEmployeeException;
+import ch.juventus.se.kiosk.error.ToYoungForThisException;
 import ch.juventus.se.kiosk.helper.ListHandler;
 import ch.juventus.se.kiosk.model.article.Article;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +33,7 @@ public class Kiosk {
         this.supplier = supplier;
         this.employees = new ArrayList<>();
         this.articles = new ArrayList<>();
-        setOpen(false);
+        this.isOpen = true;
     }
 
     public Kiosk(String name, Address address, boolean isOpen, List<Employee> employees, List<Article> articles, double cashRegister, Supplier supplier) {
@@ -43,8 +46,14 @@ public class Kiosk {
         this.supplier = supplier;
     }
 
-    public void checkout(Customer customer) throws InsufficientFundsException {
-        double totalCost = customer.getBasket().stream().mapToDouble(a -> a.getCost()).sum();
+    public void checkout(Customer customer) throws InsufficientFundsException, ToYoungForThisException {
+        ListHandler lh = new ListHandler(customer.getBasket());
+        List<Article> toYoung = lh.checkAgeRating(customer.getAge());
+        if(!toYoung.isEmpty()) {
+            customer.getBasket().removeAll(toYoung);
+            throw new ToYoungForThisException("Dear " + customer.getFullName() + ", you're to young to buy the following Article(s): \n" + toYoung.toString());
+        }
+        double totalCost = lh.getTotalAmount();
         if(customer.getCash() >= totalCost) {
             customer.setCash(customer.getCash() - totalCost);
             cashRegister += totalCost;
@@ -55,11 +64,27 @@ public class Kiosk {
         }
     }
 
+    public void doInventory(Employee empl, File outputFile) throws NotMyEmployeeException{
+        if(!employees.contains(empl)) {
+            throw new NotMyEmployeeException("You're not an Employee of this Kiosk! Therefore, you cannot do the inventory for this Kiosk!");
+        } else {
+            // TODO Logging
+            empl.doInventory(articles, outputFile);
+        }
+    }
+
     /**
-     * Close or open the kiosk.
-     * @param open describes whether the kiosk is opened or closed.
+     * Close or open the kiosk. Only Employees of this kiosk can do so.
+     * @param open describes whether the kiosk has opened or closed.
      */
-    public void setOpen(boolean open) { isOpen = open; }
+    public void setOpen(Employee empl, boolean open) throws NotMyEmployeeException {
+        if(!employees.contains(empl)) {
+            throw new NotMyEmployeeException("You're not an Employee of this Kiosk! Therefore, you cannot open/close this Kiosk!");
+        } else {
+            // TODO Logging
+            isOpen = open;
+        }
+    }
 
     @Override
     public String toString(){

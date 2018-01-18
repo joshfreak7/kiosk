@@ -23,6 +23,10 @@ public class FileHandler {
         this.outputFile = outputFile;
     }
 
+    public FileHandler(File outputFile) {
+        this.outputFile = outputFile;
+    }
+
     public void importArticlesFromJSON() {
         try {
             FileReader fr = new FileReader(inputFile);
@@ -43,23 +47,38 @@ public class FileHandler {
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet("Inventory - List of Articles");
 
+        ListHandler lh = new ListHandler(articles);
         System.out.println("Creating excel");
 
         Row row = sheet.createRow(0);
         Cell cell = row.createCell(0);
-        cell.setCellValue((String)"Anzahl");
+        cell.setCellValue((String)"Title");
         cell = row.createCell(1);
-        cell.setCellValue((String)"Beschreibung");
+        cell.setCellValue((String)"Single Price");
+        cell = row.createCell(2);
+        cell.setCellValue((String)"Quantity");
+        cell = row.createCell(3);
+        cell.setCellValue((String)"Total Price");
         int rowNum = 1;
+        int i;
 
-        for (int i = 0; i < articles.size(); i++) {
+        for (i = 0; i < articles.size(); i++) {
             Article article = articles.get(i);
             row = sheet.createRow(rowNum++);
             cell = row.createCell(0);
-            cell.setCellValue((Integer)i+1);
+            cell.setCellValue((String) article.getTitle());
             cell = row.createCell(1);
-            cell.setCellValue((String) article.toString());
+            cell.setCellValue((String) article.getPrice().toString());
+            cell = row.createCell(2);
+            cell.setCellValue((Integer) lh.getArticleCount(article));
+            cell = row.createCell(3);
+            cell.setCellValue((Double) lh.getAmountPerArticle(article));
         }
+        row = sheet.createRow(rowNum+2);
+        cell = row.createCell(0);
+        cell.setCellValue((String) "GRAND TOTAL:");
+        cell = row.createCell(3);
+        cell.setCellValue((Double) lh.getTotalAmount());
 
         try {
             FileOutputStream outputStream = new FileOutputStream(outputFile);

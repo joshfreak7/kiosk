@@ -1,6 +1,7 @@
 package ch.juventus.se.kiosk.model.article;
 
 /**
+ * A pretty normal (abstract) Drink without frills.
  * @author: Joni
  * @version: 1.0
  * @since: 07.09.2017

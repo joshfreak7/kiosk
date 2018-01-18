@@ -1,6 +1,7 @@
 package ch.juventus.se.kiosk.controller.usecase;
 
 import ch.juventus.se.kiosk.error.InsufficientFundsException;
+import ch.juventus.se.kiosk.error.ToYoungForThisException;
 import ch.juventus.se.kiosk.helper.ListHandler;
 import ch.juventus.se.kiosk.model.Address;
 import ch.juventus.se.kiosk.model.Customer;
@@ -49,8 +50,8 @@ public class DefaultUseCaseService implements UseCaseService {
         sb.append("Checkout customer:"+NEW_LINE);
         try{
             kiosk.checkout(customer);
-        }catch(InsufficientFundsException ife) {
-            sb.append(ife.getMessage());
+        }catch(InsufficientFundsException|ToYoungForThisException ife_tyft) {
+            sb.append(ife_tyft.getMessage());
         }
         sb.append("\tCustomer's basket: " + new ListHandler(customer.getBasket()).getFormattedList()+NEW_LINE);
         sb.append("\tKiosk cash: " + kiosk.getCashRegister()+NEW_LINE);

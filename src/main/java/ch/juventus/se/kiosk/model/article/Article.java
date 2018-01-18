@@ -16,10 +16,6 @@ public abstract class Article implements Comparable{
         this.price = price;
     }
 
-    public double getCost(){
-        return price.getAmount();
-    }
-
     @Override
     public String toString(){
         return this.title + ": " + this.price;

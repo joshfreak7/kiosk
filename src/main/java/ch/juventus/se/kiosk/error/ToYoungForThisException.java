@@ -5,9 +5,9 @@ package ch.juventus.se.kiosk.error;
  * @version: 1.0
  * @since: 07.09.2017
  */
-public class NotMyEmployeeException extends Exception {
+public class ToYoungForThisException extends Exception {
 
-    public NotMyEmployeeException(String message) {
+    public ToYoungForThisException(String message) {
         super(message);
     }
 }
